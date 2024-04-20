@@ -28,6 +28,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int health = 3;
     [SerializeField] public int id;
 
+
+    private bool canDash = true;
+    private bool isDashing;
+    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] private float dashingTime = 10f;
+    [SerializeField] private float dashingCooldown = 1f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -162,5 +169,22 @@ public class PlayerController : MonoBehaviour
             rightLimit = 8;
             lookDirection.x = -1;
         }
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    private void OnDash()
+    {
+        Debug.Log("dashed");
+        StartCoroutine(Dash());
     }
 }
