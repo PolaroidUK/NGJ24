@@ -17,26 +17,29 @@ public class Shot : MonoBehaviour
     public void Shoot(Vector2 vel)
     {
         GetComponent<Rigidbody2D>().velocity = vel * speed;
-        
+        sp = GetComponent<SpriteRenderer>();
         sp.color = isDamaging ? Color.red : Color.green;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (isDamaging)
+        {
+                
+            col.gameObject.GetComponent<PlayerController>().DealDamage();
+        }
+        else
+        {
+    
+            col.gameObject.GetComponent<PlayerController>().HealDamage();
+        }
+
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            if (isDamaging)
-            {
-                
-                col.gameObject.GetComponent<PlayerController>().DealDamage();
-            }
-            else
-            {
-    
-                col.gameObject.GetComponent<PlayerController>().HealDamage();
-            }
-
-            Destroy(gameObject);
-        }
+        
 
         isDamaging = !isDamaging;
         sp.color = isDamaging ? Color.red : Color.green;

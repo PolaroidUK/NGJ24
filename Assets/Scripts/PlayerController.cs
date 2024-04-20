@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,10 +18,12 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private GameObject shot;
 
-    [SerializeField] public HealthSO healthData; 
+    [SerializeField] private TextMeshPro textMesh;
 
-    GlobalEventManager _globalEventManager;    
-    [SerializeField] private int health = 3;
+    
+
+    GlobalEventManager _globalEventManager;
+    [SerializeField] public int health = 3;
     
     void Start()
     {
@@ -50,12 +53,12 @@ public class PlayerController : MonoBehaviour
     void OnTestA (InputValue iv)
     {
         _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
-        healthData.health -= 10;
+        health -= 10;
     }
     void OnTestB (InputValue iv)
     {
         _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
-        healthData.health += 10;
+        health += 10;
     }
 
     public void OnFire()
@@ -101,7 +104,10 @@ public class PlayerController : MonoBehaviour
 
     public void DealDamage()
     {
-        health--;
+        //_globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
+        health -= 1;
+        
+        textMesh.text = health+"";
         if (health<=0)
         {
             Destroy(gameObject);
@@ -110,6 +116,13 @@ public class PlayerController : MonoBehaviour
 
     public void HealDamage()
     {
-        health++;
+        //_globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
+        if (health>=3)
+        {
+            return;
+        }
+        health += 1;
+        
+        textMesh.text = health+"";
     }
 }
