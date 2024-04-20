@@ -60,9 +60,9 @@ public class PlayerController : MonoBehaviour
     }
     void OnLook(InputValue iv)
     {
-        //Vector2 inputVector = iv.Get<Vector2>();
-        //if (inputVector != Vector2.zero)
-        //lookDirection = inputVector.normalized;
+        Vector2 inputVector = iv.Get<Vector2>();
+        if (inputVector != Vector2.zero)
+            lookDirection = inputVector.normalized;
     }
 
     void OnTestA(InputValue iv)
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         textMesh.text = health + "";
     }
 
-    public void Set(int i)
+    public void Set(int i) // This is for sorting the players
     {
         id = i;
         if (id == 1)

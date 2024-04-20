@@ -14,6 +14,9 @@ public class Shot : MonoBehaviour
     [SerializeField] private Transform spriteHolder;
     [SerializeField] private float rotation;
 
+    public GameObject attackPlaneSprite;
+    public GameObject healingPlaneSprite;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,7 +33,9 @@ public class Shot : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = vel * speed;
         isDamaging = b;
         sp = GetComponentInChildren<SpriteRenderer>();
-        sp.color = isDamaging ? Color.red : Color.green;
+        //        sp.color = isDamaging ? Color.red : Color.green;
+        attackPlaneSprite.SetActive(isDamaging);
+        healingPlaneSprite.SetActive(!isDamaging);
 
     }
 
@@ -55,7 +60,9 @@ public class Shot : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         isDamaging = !isDamaging;
-        sp.color = isDamaging ? Color.red : Color.green;
+        //        sp.color = isDamaging ? Color.red : Color.green;
+        attackPlaneSprite.SetActive(isDamaging);
+        healingPlaneSprite.SetActive(!isDamaging);
         GameManager.Instance.audioManager.playOneShot(reflectSound);
         //Vector2 inDirection = GetComponent<Rigidbody2D>().velocity;
         //Vector2 inNormal = col.contacts[0].normal;
