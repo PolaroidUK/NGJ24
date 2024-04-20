@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
     private bool isDashing;
     [SerializeField] private float dashingPower = 24f;
-    [SerializeField] private float dashingTime = 10f;
+    [SerializeField] private float dashingTime = 1f;
     [SerializeField] private float dashingCooldown = 1f;
 
     void Start()
@@ -173,13 +173,18 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        canDash = false;
-        isDashing = true;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        yield return new WaitForSeconds(dashingTime);
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
+        if (canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            moveSpeed = moveSpeed * dashingPower;
+            //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+            yield return new WaitForSeconds(dashingTime);
+            moveSpeed = moveSpeed / dashingPower;
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            canDash = true;
+        }
     }
 
     private void OnDash()

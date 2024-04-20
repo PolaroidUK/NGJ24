@@ -113,6 +113,9 @@ MonoBehaviour:
   rightLimit: 8
   health: 3
   id: 0
+  dashingPower: 3
+  dashingTime: 0.2
+  dashingCooldown: 2
 --- !u!114 &8312862911180459840
 MonoBehaviour:
   m_ObjectHideFlags: 0
