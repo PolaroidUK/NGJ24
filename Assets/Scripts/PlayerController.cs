@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     bool areDamaging = false;
     public void OnFire()
     {
-        if (timeFired + 2 <= Time.time) // 2 second cooldown on shooting
+        if (timeFired + 1 <= Time.time) // 1 second cooldown on shooting
         {
             GameObject newShot;
             newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
