@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform pointerPosition;
     
     [SerializeField] private GameObject shot;
+
+    [SerializeField] private int health;
     
     void Start()
     {
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        Instantiate(shot,pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
+        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
     }
     void Move()
     {
@@ -80,5 +82,19 @@ public class PlayerController : MonoBehaviour
     private void PointerMove()
     {
         pointer.rotation = quaternion.AxisAngle(Vector3.forward,Mathf.Atan2(lookDirection.y,lookDirection.x));
+    }
+
+    public void DealDamage()
+    {
+        health--;
+        if (health<=0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void HealDamage()
+    {
+        health++;
     }
 }

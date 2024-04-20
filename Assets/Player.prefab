@@ -104,6 +104,8 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
   pointer: {fileID: 7553085190197092263}
+  pointerPosition: {fileID: 5756430302993897376}
+  shot: {fileID: 3704621711813858821, guid: 89b859d71e26b10499aaddea020c5dbd, type: 3}
 --- !u!114 &8312862911180459840
 MonoBehaviour:
   m_ObjectHideFlags: 0
