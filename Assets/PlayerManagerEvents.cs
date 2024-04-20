@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerManagerEvents : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   public int playersJoined = 0; 
+   void OnPlayerJoined()
+   {
+      playersJoined++;
+      if (playersJoined == 2)
+      {
+         SortPlayers();
+      }
+   }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   private void SortPlayers()
+   {
+      var players = FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
+      players[0].Set(1);
+      players[1].Set(2);
+   }
 }

@@ -14,11 +14,13 @@ public class Shot : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
     }
 
-    public void Shoot(Vector2 vel)
+    public void Shoot(Vector2 vel, bool b)
     {
         GetComponent<Rigidbody2D>().velocity = vel * speed;
+        isDamaging = b;
         sp = GetComponent<SpriteRenderer>();
         sp.color = isDamaging ? Color.red : Color.green;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
