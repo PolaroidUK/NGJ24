@@ -190,6 +190,17 @@ public class PlayerController : MonoBehaviour
 
         dashbar.SetFloat("_Dash", dashCooldownCounter);
 
+        while (dashingTime >= 0)
+        {
+            dashingTime -= Time.deltaTime;
+            //            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        if (dashingTime <= 0)
+        {
+            moveSpeed = moveSpeed / dashingPower;
+        }
+
         while (dashCooldownCounter <= dashingCooldown)
         {
             dashCooldownCounter += Time.deltaTime;
@@ -198,7 +209,6 @@ public class PlayerController : MonoBehaviour
         }
 
         dashCooldownCounter = 0f;
-        moveSpeed = moveSpeed / dashingPower;
         canDash = true;
         isDashing = false;
 

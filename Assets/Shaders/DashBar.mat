@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dash: 1.0004131
+    - _Dash: 1.624709
     - _EnableExternalAlpha: 0
     m_Colors:
     - _Color: {r: 0.5462235, g: 1, b: 0, a: 1}
