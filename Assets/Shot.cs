@@ -7,6 +7,7 @@ public class Shot : MonoBehaviour
 {
     public bool isDamaging;
     private SpriteRenderer sp;
+    [SerializeField] FMODUnity.EventReference reflectSound;
     [SerializeField] private float speed = 10;
 
     private void Start()
@@ -45,6 +46,7 @@ public class Shot : MonoBehaviour
     {
         isDamaging = !isDamaging;
         sp.color = isDamaging ? Color.red : Color.green;
+        GameManager.Instance.audioManager.playOneShot(reflectSound);
         //Vector2 inDirection = GetComponent<Rigidbody2D>().velocity;
         //Vector2 inNormal = col.contacts[0].normal;
         //Vector2 newVelocity = Vector2.Reflect(inDirection, inNormal) * speed;

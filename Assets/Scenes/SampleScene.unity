@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a03b17e67fef7841a16cbd5bf734082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playersJoined: 0
 --- !u!1 &413549843
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9137775253360089436, guid: 6b32fec2316e4b949819af70878333fd, type: 3}
       propertyPath: m_Name
-      value: GameManager (1)
+      value: GameManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

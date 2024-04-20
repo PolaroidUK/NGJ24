@@ -127,6 +127,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDamaging: 0
+  speed: 4
+  reflectSound:
+    Guid:
+      Data1: 2042277571
+      Data2: 1170937507
+      Data3: -1713623640
+      Data4: 1280338986
+    Path: event:/Reflect
   speed: 10
   smallExplosion: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
   bigExplosion: {fileID: 139366, guid: 5b634715d24fef24493f982ceeef652b, type: 3}

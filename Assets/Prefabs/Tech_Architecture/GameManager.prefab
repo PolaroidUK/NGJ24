@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 608354306877411934}
-  healthScriptableObject: {fileID: 11400000, guid: 183cb78cd4c87034a9506b7eec3b8fa0, type: 2}
+  playerController: {fileID: 0}
 --- !u!1 &1257596424229629707
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +449,57 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &5290739101871389619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1030377261194954217}
+  - component: {fileID: 6001789000082997829}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1030377261194954217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290739101871389619}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4612975343715113881}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6001789000082997829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290739101871389619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42db813991f1a94468a3bddcfdb25b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMusicRef:
+    Guid:
+      Data1: 582611729
+      Data2: 1304458675
+      Data3: -1420598126
+      Data4: -1780810607
+    Path: event:/Main_Music
 --- !u!1 &6307794850344225284
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +577,7 @@ Transform:
   - {fileID: 3271568989027534047}
   - {fileID: 7207292927917816539}
   - {fileID: 1254128225265327116}
+  - {fileID: 1030377261194954217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7978450830389734064
