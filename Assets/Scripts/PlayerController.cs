@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,6 +41,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _globalEventManager = GameManager.Instance.globalEventManager;
+
+
+        dashbarObject.SetActive(false);
     }
 
     void Update()
@@ -51,10 +55,6 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue iv)
     {
-        if (isDashing)
-        {
-            return;
-        }
         Vector2 inputVector = iv.Get<Vector2>();
         moveDirection = inputVector.normalized;
     }
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     }
 
     float timeFired;
-    bool areDamaging = false;
+    bool areDamaging = true;
     public void OnFire()
     {
         if (timeFired + 1 <= Time.time) // 1 second cooldown on shooting
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
             newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
             newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
 
-            //            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
+            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
             timeFired = Time.time;
         }
     }
@@ -96,9 +96,9 @@ public class PlayerController : MonoBehaviour
     /*
         public void OnFire2()
         {
-            Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection, true);
-        }
-    */
+            Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection, false);
+        }*/
+
     void Move()
     {
         rb.velocity = moveDirection * (moveSpeed);
@@ -177,27 +177,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator Dash()
-    {
-        if (canDash)
-        {
-            isDashing = true;
-            canDash = false;
-            // show the dashing cooldown
-            // code here
+    public Material dashbar;
 
-            moveSpeed = moveSpeed * dashingPower;
-            yield return new WaitForSeconds(dashingTime);
-            moveSpeed = moveSpeed / dashingPower;
-            isDashing = false;
-            yield return new WaitForSeconds(dashingCooldown);
-            canDash = true;
+    public GameObject dashbarObject;
+
+    public float dashCooldownCounter;
+
+    private IEnumerator DashCooldown()
+    {
+        dashCooldownCounter = 0f;
+        moveSpeed = moveSpeed * dashingPower;
+
+        dashbar.SetFloat("_Dash", dashCooldownCounter);
+
+        while (dashCooldownCounter <= dashingCooldown)
+        {
+            dashCooldownCounter += Time.deltaTime;
+            dashbar.SetFloat("_Dash", dashCooldownCounter);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
+
+        dashCooldownCounter = 0f;
+        moveSpeed = moveSpeed / dashingPower;
+        canDash = true;
+        isDashing = false;
+
+        dashbarObject.SetActive(false);
     }
+
 
     private void OnDash()
     {
-        Debug.Log("dashed");
-        StartCoroutine(Dash());
+        if (canDash)
+        {
+            dashbarObject.SetActive(true);
+
+            isDashing = true;
+            canDash = false;
+
+            StartCoroutine(DashCooldown());
+        }
     }
 }

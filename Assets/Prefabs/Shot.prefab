@@ -114,7 +114,7 @@ MonoBehaviour:
       Data3: -1713623640
       Data4: 1280338986
     Path: event:/Reflect
-  speed: 5
+  speed: 8
   rb: {fileID: 0}
   spriteHolder: {fileID: 4543577580810645791}
   rotation: 1.6
