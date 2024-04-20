@@ -77,4 +77,13 @@ public class GameManager : MonoBehaviour
             return null;
         }
     }
+
+
+    public void PrintPlayerSecrets ()
+    {
+        foreach (string secret in playerSecrets.Values)
+        {
+            Debug.Log("Player Secret - " + secret);
+        }
+    }
 }
