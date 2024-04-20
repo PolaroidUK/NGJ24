@@ -37,13 +37,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingTime = 1f;
     [SerializeField] private float dashingCooldown = 1f;
 
+
+    public GameObject attackPrefab;
+    public GameObject healPrefab;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         _globalEventManager = GameManager.Instance.globalEventManager;
 
-
         dashbarObject.SetActive(false);
+
+        attackPrefab = transform.Find("AttackPrefab").gameObject;
+        healPrefab = transform.Find("HealPrefab").gameObject;
+
+        ShowAttack();
     }
 
     void Update()
@@ -51,6 +58,8 @@ public class PlayerController : MonoBehaviour
         Move();
         ConstraintCheck();
         PointerMove();
+
+        
     }
 
     void OnMove(InputValue iv)
@@ -89,6 +98,8 @@ public class PlayerController : MonoBehaviour
 
             areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
             timeFired = Time.time;
+
+            Toggle();
         }
     }
 
@@ -228,4 +239,35 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(DashCooldown());
         }
     }
+
+
+    private bool showingAttack = true;
+
+    // Call this method to toggle between prefabs
+    public void Toggle()
+    {
+        if (showingAttack)
+        {
+            ShowHeal();
+        }
+        else
+        {
+            ShowAttack();
+        }
+    }
+
+    void ShowAttack()
+    {
+        attackPrefab.SetActive(true);
+        healPrefab.SetActive(false);
+        showingAttack = true;
+    }
+
+    void ShowHeal()
+    {
+        attackPrefab.SetActive(false);
+        healPrefab.SetActive(true);
+        showingAttack = false;
+    }
+
 }
