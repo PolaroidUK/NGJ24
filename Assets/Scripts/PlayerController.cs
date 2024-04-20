@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue iv)
     {
+        if (isDashing)
+        {
+            return;
+        }
         Vector2 inputVector = iv.Get<Vector2>();
         moveDirection = inputVector.normalized;
     }
