@@ -6,12 +6,30 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     GlobalEventManager _globalEventManager;
-    [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] PlayerController playerController;
+
+    [SerializeField] public int currentPlayerIndex = 0;
+
+    [SerializeField] public int ui_Flow_Current_Index = 0;
+
+    [SerializeField] List<Canvas> uiFlowScreens;
+
+    private Canvas currentCanvas;
+    private Canvas nextCanvas; 
+
+    [SerializeField] TMP_InputField secretInputField;
 
     void  Start()
     {
-         healthText.text = playerController.health.ToString();
+        currentCanvas = uiFlowScreens[ui_Flow_Current_Index];
+        nextCanvas = uiFlowScreens[ui_Flow_Current_Index + 1];
+        currentCanvas.gameObject.SetActive(true);
+
+        // Set all other Canvases False;
+        for (int i = ui_Flow_Current_Index + 1; i < uiFlowScreens.Count; i++)
+        {
+            uiFlowScreens[i].gameObject.SetActive(false);
+        }
     }
 
     public void Initialize (GlobalEventManager globalEventManager)
@@ -24,13 +42,30 @@ public class UIManager : MonoBehaviour
     private void DecreaseHealth(object o)
     {
         Debug.Log("UIManager::DecreaseHealth");
-        healthText.text = playerController.health.ToString();
     }
 
     private void IncreaseHealth(object o)
     {
         Debug.Log("UIManager::IncreaseHealth");
-        healthText.text = playerController.health.ToString();
+    }
+
+    public void IncrementUIFlow ()
+    {
+
+        // Transition Canvases.
+
+        currentCanvas.gameObject.SetActive(false);
+        nextCanvas.gameObject.SetActive(true);
+        ui_Flow_Current_Index ++;
+        currentCanvas = uiFlowScreens[ui_Flow_Current_Index];
+        nextCanvas = uiFlowScreens[ui_Flow_Current_Index + 1];
+
+        // Handle Different cases.
+    }
+
+    public void InputPlayerSecret (string newPlayerSecret)
+    {
+        GameManager.Instance.SetPlayerSecret(currentPlayerIndex, secretInputField.text);
     }
     
 }
