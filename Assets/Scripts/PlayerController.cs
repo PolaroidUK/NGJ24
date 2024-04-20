@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private GameObject shot;
 
-    [SerializeField] private int health;
-
     [SerializeField] public HealthSO healthData; 
 
     GlobalEventManager _globalEventManager;    
+    [SerializeField] private int health = 3;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        Instantiate(shot,pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
+        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
     }
     void Move()
     {
