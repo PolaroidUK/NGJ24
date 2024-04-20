@@ -11,14 +11,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] List<GameObject> introFlowCanvases;
     [SerializeField] TMP_InputField secretInputField;
-
+    [SerializeField] GameObject introFlowCollection;
     public int currentPlayerIndex;
     public int currentUIFlowIndex;
     public GameObject currentCanvas;
     public GameObject nextCanvas;
-
-    public int currentPlayerNumber;
-    public int currentOpponentNumber;
 
     void  Start()
     {
@@ -67,6 +64,13 @@ public class UIManager : MonoBehaviour
             currentCanvas.SetActive(false);
             // Load Dialogue into HUD Canvas.
             GameManager.Instance.PrintPlayerSecrets();
+
+            introFlowCollection.SetActive(false);
+
+            // TODO - Start Dialogue Sequence.
+
+            // TEST - Start Countdown.
+            _globalEventManager.Dispatch(GlobalEventManager.EventTypes.BeginCountdown, null);
 
         } else 
         {
