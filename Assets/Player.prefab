@@ -104,13 +104,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   moveDirection: {x: 0, y: 0}
-  lookDirection: {x: 0, y: 0}
+  lookDirection: {x: 1, y: 0}
   pointer: {fileID: 7553085190197092263}
   pointerPosition: {fileID: 5691989149718801236}
   shot: {fileID: 3704621711813858821, guid: 89b859d71e26b10499aaddea020c5dbd, type: 3}
   textMesh: {fileID: 6736644864947307789}
-  leftLimit: 0
-  rightLimit: 0
+  leftLimit: -8
+  rightLimit: 8
   health: 3
   id: 0
 --- !u!114 &8312862911180459840
