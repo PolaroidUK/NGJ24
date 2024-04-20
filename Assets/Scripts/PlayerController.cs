@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
@@ -78,7 +79,10 @@ public class PlayerController : MonoBehaviour
         if (timeFired + 1 <= Time.time) // 1 second cooldown on shooting
         {
             GameObject newShot;
-            newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
+            var rotation = Quaternion.identity;
+            rotation *= Quaternion.Euler(0, 0, -90); // this adds a 90 degrees Z rotation to place the triangle projectile in the right facing
+
+            newShot = Instantiate(shot, pointerPosition.position, rotation);
             newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
 
             //            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
@@ -178,7 +182,6 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             canDash = false;
             moveSpeed = moveSpeed * dashingPower;
-            //rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
             yield return new WaitForSeconds(dashingTime);
             moveSpeed = moveSpeed / dashingPower;
             isDashing = false;
