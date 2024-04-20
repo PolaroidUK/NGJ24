@@ -8,12 +8,19 @@ public class UIManager : MonoBehaviour
 
     public void Initialize (GlobalEventManager globalEventManager)
     {
-        
+        _globalEventManager = globalEventManager;
+        _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthDecrease, DecreaseHealth);
+        _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthDecrease, IncreaseHealth);
     }
 
-    private void DecreaseHealth(object null)
+    private void DecreaseHealth(object o)
     {
+        Debug.Log("UIManager::DecreaseHealth");
+    }
 
+    private void IncreaseHealth(object o)
+    {
+        Debug.Log("UIManager::IncreaseHealth");
     }
     
 }

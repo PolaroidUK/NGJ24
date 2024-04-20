@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
         // UI Manager Setup
         uiManager = GetComponentInChildren<UIManager>();
+        uiManager.Initialize(globalEventManager);
 
     }
 
