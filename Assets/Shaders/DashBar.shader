@@ -1,7 +1,7 @@
 Shader "Unlit/DashBar" {
     Properties{
         _Dash("Dash", Range(0, 1)) = 0
-        _Color("Bar Color", Color) = (1, 0, 0, 1)
+        _Color("Bar Color", Color) = (0, 0, 1, 1)
     }
         SubShader{
             Tags { "RenderType" = "Opaque" }
@@ -24,6 +24,7 @@ Shader "Unlit/DashBar" {
                 };
 
                 float _Dash;
+                fixed4 _Color;
 
                 v2f vert(appdata v)
                 {
@@ -36,7 +37,7 @@ Shader "Unlit/DashBar" {
                 fixed4 frag(v2f i) : SV_Target
                 {
                     if (i.uv.x <= _Dash) {
-                        return fixed4(0, 0, 1, 1);
+                        return _Color;
                     }
 
                     return fixed4(0, 0, 0, 0);
