@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 moveDirection;
     [SerializeField] private Vector2 lookDirection;
     [SerializeField] private Transform pointer;
-
+    [SerializeField] private Transform pointerPosition;
+    
+    [SerializeField] private GameObject shot;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +39,11 @@ public class PlayerController : MonoBehaviour
         Vector2 inputVector = iv.Get<Vector2>();
         if (inputVector != Vector2.zero)
             lookDirection = inputVector.normalized;
+    }
+
+    public void OnFire()
+    {
+        Instantiate(shot,pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
     }
     void Move()
     {
