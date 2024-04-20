@@ -188,7 +188,7 @@ MonoBehaviour:
   lookDirection: {x: 1, y: 0}
   pointer: {fileID: 7553085190197092263}
   pointerPosition: {fileID: 5691989149718801236}
-  shot: {fileID: 3704621711813858821, guid: 89b859d71e26b10499aaddea020c5dbd, type: 3}
+  shot: {fileID: 3704621711813858821, guid: e4b34ced8e29a494385a163de01a2e19, type: 3}
   textMesh: {fileID: 6736644864947307789}
   leftLimit: -8
   rightLimit: 8
