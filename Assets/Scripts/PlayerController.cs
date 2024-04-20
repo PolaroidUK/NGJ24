@@ -18,10 +18,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject shot;
 
     [SerializeField] private int health;
-    
+
+    [SerializeField] public HealthSO healthData; 
+
+    GlobalEventManager _globalEventManager;    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _globalEventManager = GameManager.Instance.globalEventManager;
     }
 
     void Update()
@@ -41,6 +45,17 @@ public class PlayerController : MonoBehaviour
         Vector2 inputVector = iv.Get<Vector2>();
         if (inputVector != Vector2.zero)
             lookDirection = inputVector.normalized;
+    }
+
+    void OnTestA (InputValue iv)
+    {
+        _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
+        healthData.health -= 10;
+    }
+    void OnTestB (InputValue iv)
+    {
+        _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
+        healthData.health += 10;
     }
 
     public void OnFire()
