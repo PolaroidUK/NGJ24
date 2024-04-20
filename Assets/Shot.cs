@@ -28,14 +28,14 @@ public class Shot : MonoBehaviour
         if (isDamaging)
         {
             col.gameObject.GetComponent<PlayerController>().DealDamage();
-            // When a ball hits a player, it makes a big particle effect
+            // When a ball damages a player, it makes a big particle effect
             Explode(bigExplosion);
         }
         else
         {
             col.gameObject.GetComponent<PlayerController>().HealDamage();
-            // When a ball hits a player, it makes a big particle effect
-            Explode(bigExplosion);
+            // When a ball heals a player, it makes a healing particle effect
+            //Explode(bigExplosion);
         }
 
         Destroy(gameObject);
@@ -62,7 +62,9 @@ public class Shot : MonoBehaviour
     void Explode(GameObject smallOrBigExplosion)
     {
         GameObject explosion;
-        explosion = Instantiate(smallOrBigExplosion, transform.position, Quaternion.identity);
+        Quaternion quaternion = Quaternion.identity;
+        var randomRot = Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward);
+        explosion = Instantiate(smallOrBigExplosion, transform.position, randomRot);
         //        explosion.GetComponent<ParticleSystem>().Play();
         Destroy(explosion, .8f);
     }
