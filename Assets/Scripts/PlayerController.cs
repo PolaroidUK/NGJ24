@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform pointerPosition;
     
     [SerializeField] private GameObject shot;
+
+    [SerializeField] private int health;
     
     void Start()
     {
@@ -80,5 +82,19 @@ public class PlayerController : MonoBehaviour
     private void PointerMove()
     {
         pointer.rotation = quaternion.AxisAngle(Vector3.forward,Mathf.Atan2(lookDirection.y,lookDirection.x));
+    }
+
+    public void DealDamage()
+    {
+        health--;
+        if (health<=0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void HealDamage()
+    {
+        health++;
     }
 }
