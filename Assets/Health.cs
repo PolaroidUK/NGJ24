@@ -12,12 +12,26 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // If player reaches 0 health, die
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
 
+    void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 }
