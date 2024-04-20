@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager {get; private set;}
     public AudioManager audioManager {get; private set;}
 
+    public Dictionary<int,string> playerSecrets = new Dictionary<int, string>();
+
     private void Awake()
     {
         // Check if already created.
@@ -48,5 +50,40 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
         Application.Quit();
+    }
+
+
+    public void SetPlayerSecret(int playerIndex, string playerSecretString)
+    {
+        Debug.Log("GameManager::SetPlayerSecret index - " + playerIndex + " secret = " + playerSecretString);
+        if (playerSecrets.ContainsKey(playerIndex))
+        {
+            Debug.LogError("Player Secret already exists for this player! index = " + playerIndex); 
+        } else {
+            // create the secret.
+            Debug.Log("Adding Player Secret - " + playerSecretString);
+            playerSecrets.Add(playerIndex,playerSecretString);
+        }
+    }
+    public string GetPlayerSecret(int playerIndex)
+    {
+        Debug.Log("GameManager::GetPlayerSecret index - " + playerIndex);
+        if (playerSecrets.ContainsKey(playerIndex))
+        {
+            return playerSecrets[playerIndex];
+        } else {
+            // create the secret.
+            Debug.LogError("Player Secret DOES NOT EXIST for player = " + playerIndex); 
+            return null;
+        }
+    }
+
+
+    public void PrintPlayerSecrets ()
+    {
+        foreach (string secret in playerSecrets.Values)
+        {
+            Debug.Log("Player Secret - " + secret);
+        }
     }
 }
