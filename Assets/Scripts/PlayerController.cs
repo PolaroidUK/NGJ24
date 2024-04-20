@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,11 +18,16 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private GameObject shot;
 
-    [SerializeField] public HealthSO healthData; 
+    [SerializeField] private TextMeshPro textMesh;
 
-    GlobalEventManager _globalEventManager;    
-    [SerializeField] private int health = 3;
+    [SerializeField] private float leftLimit,rightLimit;
+
     
+
+    GlobalEventManager _globalEventManager;
+    [SerializeField] public int health = 3;
+    [SerializeField] public int id;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,26 +47,30 @@ public class PlayerController : MonoBehaviour
         moveDirection = inputVector.normalized;
     }
     void OnLook(InputValue iv)
-    {
-        Vector2 inputVector = iv.Get<Vector2>();
-        if (inputVector != Vector2.zero)
-            lookDirection = inputVector.normalized;
+    { 
+        //Vector2 inputVector = iv.Get<Vector2>();
+        //if (inputVector != Vector2.zero)
+            //lookDirection = inputVector.normalized;
     }
 
     void OnTestA (InputValue iv)
     {
         _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
-        healthData.health -= 10;
+        health -= 10;
     }
     void OnTestB (InputValue iv)
     {
         _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
-        healthData.health += 10;
+        health += 10;
     }
 
     public void OnFire()
     {
-        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
+        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection,false);
+    }
+    public void OnFire2()
+    {
+        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection,true);
     }
     void Move()
     {
@@ -81,16 +91,16 @@ public class PlayerController : MonoBehaviour
             pos.y = -4;
             transform.position = pos;
         }
-        if (transform.position.x > 8)
+        if (transform.position.x > rightLimit)
         {
             Vector3 pos = transform.position;
-            pos.x = 8;
+            pos.x = rightLimit;
             transform.position = pos;
         }
-        if (transform.position.x < -8)
+        if (transform.position.x < leftLimit)
         {
             Vector3 pos = transform.position;
-            pos.x = -8;
+            pos.x = leftLimit;
             transform.position = pos;
         }
     }
@@ -101,7 +111,10 @@ public class PlayerController : MonoBehaviour
 
     public void DealDamage()
     {
-        health--;
+        //_globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
+        health -= 1;
+        
+        textMesh.text = health+"";
         if (health<=0)
         {
             Destroy(gameObject);
@@ -110,6 +123,30 @@ public class PlayerController : MonoBehaviour
 
     public void HealDamage()
     {
-        health++;
+        //_globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
+        if (health>=3)
+        {
+            return;
+        }
+        health += 1;
+        
+        textMesh.text = health+"";
+    }
+
+    public void Set(int i)
+    {
+        id = i;
+        if (id == 1 )
+        {
+            leftLimit = -8;
+            rightLimit = 0;
+            lookDirection.x = 1;
+        }
+        else
+        {
+            leftLimit = 0;
+            rightLimit = 8;
+            lookDirection.x = -1;
+        }
     }
 }

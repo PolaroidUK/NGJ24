@@ -7,11 +7,11 @@ public class UIManager : MonoBehaviour
 {
     GlobalEventManager _globalEventManager;
     [SerializeField] TextMeshProUGUI healthText;
-    [SerializeField] HealthSO healthScriptableObject;
+    [SerializeField] PlayerController playerController;
 
     void  Start()
     {
-         healthText.text = healthScriptableObject.health.ToString();
+         healthText.text = playerController.health.ToString();
     }
 
     public void Initialize (GlobalEventManager globalEventManager)
@@ -24,13 +24,13 @@ public class UIManager : MonoBehaviour
     private void DecreaseHealth(object o)
     {
         Debug.Log("UIManager::DecreaseHealth");
-        healthText.text = healthScriptableObject.health.ToString();
+        healthText.text = playerController.health.ToString();
     }
 
     private void IncreaseHealth(object o)
     {
         Debug.Log("UIManager::IncreaseHealth");
-        healthText.text = healthScriptableObject.health.ToString();
+        healthText.text = playerController.health.ToString();
     }
     
 }
