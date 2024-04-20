@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Shot : MonoBehaviour
@@ -9,17 +10,25 @@ public class Shot : MonoBehaviour
     private SpriteRenderer sp;
     [SerializeField] FMODUnity.EventReference reflectSound;
     [SerializeField] private float speed = 10;
-
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform spriteHolder;
+    
     private void Start()
     {
-        sp = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        sp = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        spriteHolder.rotation = quaternion.AxisAngle(Vector3.forward, Mathf.Atan2(rb.velocity.y, rb.velocity.x)-100f);
     }
 
     public void Shoot(Vector2 vel, bool b)
     {
         GetComponent<Rigidbody2D>().velocity = vel * speed;
         isDamaging = b;
-        sp = GetComponent<SpriteRenderer>();
+        sp = GetComponentInChildren<SpriteRenderer>();
         sp.color = isDamaging ? Color.red : Color.green;
 
     }
