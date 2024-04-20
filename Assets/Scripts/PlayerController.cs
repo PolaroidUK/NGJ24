@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
             newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
 
-            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
+            //            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
             timeFired = Time.time;
         }
     }
