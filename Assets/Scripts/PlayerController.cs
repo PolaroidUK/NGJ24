@@ -7,22 +7,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    
+
     private Vector3 moveInput;
-    public float moveSpeed = 5f; 
+    public float moveSpeed = 5f;
     private Rigidbody2D rb;
     [SerializeField] private Vector2 moveDirection;
     [SerializeField] private Vector2 lookDirection;
     [SerializeField] private Transform pointer;
     [SerializeField] private Transform pointerPosition;
-    
+
     [SerializeField] private GameObject shot;
 
     [SerializeField] private TextMeshPro textMesh;
 
-    [SerializeField] private float leftLimit,rightLimit;
+    [SerializeField] private float leftLimit, rightLimit;
 
-    
+
 
     GlobalEventManager _globalEventManager;
     [SerializeField] public int health = 3;
@@ -47,36 +47,50 @@ public class PlayerController : MonoBehaviour
         moveDirection = inputVector.normalized;
     }
     void OnLook(InputValue iv)
-    { 
+    {
         //Vector2 inputVector = iv.Get<Vector2>();
         //if (inputVector != Vector2.zero)
-            //lookDirection = inputVector.normalized;
+        //lookDirection = inputVector.normalized;
     }
 
-    void OnTestA (InputValue iv)
+    void OnTestA(InputValue iv)
     {
         _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
         health -= 10;
     }
-    void OnTestB (InputValue iv)
+    void OnTestB(InputValue iv)
     {
         _globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
         health += 10;
     }
 
+    float timeFired;
+    bool areDamaging = false;
     public void OnFire()
     {
-        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection,false);
+        if (timeFired + 2 <= Time.time) // 2 second cooldown on shooting
+        {
+            GameObject newShot;
+            newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
+            newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
+
+            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
+            timeFired = Time.time;
+        }
     }
-    public void OnFire2()
-    {
-        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection,true);
-    }
+
+    // If we want to be able to shoot on the left trigger
+    /*
+        public void OnFire2()
+        {
+            Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection, true);
+        }
+    */
     void Move()
     {
-        rb.velocity = moveDirection * (moveSpeed );
+        rb.velocity = moveDirection * (moveSpeed);
     }
-    
+
     private void ConstraintCheck()
     {
         if (transform.position.y > 4)
@@ -106,16 +120,16 @@ public class PlayerController : MonoBehaviour
     }
     private void PointerMove()
     {
-        pointer.rotation = quaternion.AxisAngle(Vector3.forward,Mathf.Atan2(lookDirection.y,lookDirection.x));
+        pointer.rotation = quaternion.AxisAngle(Vector3.forward, Mathf.Atan2(lookDirection.y, lookDirection.x));
     }
 
     public void DealDamage()
     {
         //_globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthDecrease, null);
         health -= 1;
-        
-        textMesh.text = health+"";
-        if (health<=0)
+
+        textMesh.text = health + "";
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
@@ -124,19 +138,19 @@ public class PlayerController : MonoBehaviour
     public void HealDamage()
     {
         //_globalEventManager.Dispatch(GlobalEventManager.EventTypes.Player1HealthIncrease, null);
-        if (health>=3)
+        if (health >= 3)
         {
             return;
         }
         health += 1;
-        
-        textMesh.text = health+"";
+
+        textMesh.text = health + "";
     }
 
     public void Set(int i)
     {
         id = i;
-        if (id == 1 )
+        if (id == 1)
         {
             leftLimit = -8;
             rightLimit = 0;
