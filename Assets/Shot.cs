@@ -12,7 +12,8 @@ public class Shot : MonoBehaviour
     [SerializeField] private float speed = 10;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform spriteHolder;
-    
+    [SerializeField] private float rotation;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +22,7 @@ public class Shot : MonoBehaviour
 
     private void Update()
     {
-        spriteHolder.rotation = quaternion.AxisAngle(Vector3.forward, Mathf.Atan2(rb.velocity.y, rb.velocity.x)-100f);
+        spriteHolder.rotation = quaternion.AxisAngle(Vector3.forward, Mathf.Atan2(rb.velocity.y, rb.velocity.x) - rotation);
     }
 
     public void Shoot(Vector2 vel, bool b)
