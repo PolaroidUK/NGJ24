@@ -79,8 +79,6 @@ public class PlayerController : MonoBehaviour
         if (timeFired + 1 <= Time.time) // 1 second cooldown on shooting
         {
             GameObject newShot;
-            var rotation = Quaternion.identity;
-            rotation *= Quaternion.Euler(0, 0, -90); // this adds a 90 degrees Z rotation to place the triangle projectile in the right facing
 
             newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
             newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
@@ -181,6 +179,9 @@ public class PlayerController : MonoBehaviour
         {
             isDashing = true;
             canDash = false;
+            // show the dashing cooldown
+            // code here
+
             moveSpeed = moveSpeed * dashingPower;
             yield return new WaitForSeconds(dashingTime);
             moveSpeed = moveSpeed / dashingPower;
