@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
 
     void  Start()
     {
-         healthText.text = playerController.health.ToString();
+         //healthText.text = playerController.health.ToString();
     }
 
     public void Initialize (GlobalEventManager globalEventManager)

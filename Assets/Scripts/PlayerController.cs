@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
             var rotation = Quaternion.identity;
             rotation *= Quaternion.Euler(0, 0, -90); // this adds a 90 degrees Z rotation to place the triangle projectile in the right facing
 
-            newShot = Instantiate(shot, pointerPosition.position, rotation);
+            newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
             newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
 
             //            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
