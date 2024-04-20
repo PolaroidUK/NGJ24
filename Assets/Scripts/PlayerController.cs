@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
@@ -27,6 +28,13 @@ public class PlayerController : MonoBehaviour
     GlobalEventManager _globalEventManager;
     [SerializeField] public int health = 3;
     [SerializeField] public int id;
+
+
+    private bool canDash = true;
+    private bool isDashing;
+    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] private float dashingTime = 1f;
+    [SerializeField] private float dashingCooldown = 1f;
 
     void Start()
     {
@@ -71,7 +79,10 @@ public class PlayerController : MonoBehaviour
         if (timeFired + 1 <= Time.time) // 1 second cooldown on shooting
         {
             GameObject newShot;
-            newShot = Instantiate(shot, pointerPosition.position, quaternion.identity);
+            var rotation = Quaternion.identity;
+            rotation *= Quaternion.Euler(0, 0, -90); // this adds a 90 degrees Z rotation to place the triangle projectile in the right facing
+
+            newShot = Instantiate(shot, pointerPosition.position, rotation);
             newShot.GetComponent<Shot>().Shoot(lookDirection, areDamaging);
 
             //            areDamaging = !areDamaging; // Each time you shoot, you will heal/harm
@@ -162,5 +173,26 @@ public class PlayerController : MonoBehaviour
             rightLimit = 8;
             lookDirection.x = -1;
         }
+    }
+
+    private IEnumerator Dash()
+    {
+        if (canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            moveSpeed = moveSpeed * dashingPower;
+            yield return new WaitForSeconds(dashingTime);
+            moveSpeed = moveSpeed / dashingPower;
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            canDash = true;
+        }
+    }
+
+    private void OnDash()
+    {
+        Debug.Log("dashed");
+        StartCoroutine(Dash());
     }
 }
