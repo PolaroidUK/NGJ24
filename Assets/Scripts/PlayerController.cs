@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        Instantiate(shot,pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
+        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection);
     }
     void Move()
     {
