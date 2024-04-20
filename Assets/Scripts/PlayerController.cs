@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private GameObject shot;
 
-    [SerializeField] private int health;
+    [SerializeField] private int health = 3;
     
     void Start()
     {
