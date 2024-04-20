@@ -18,20 +18,18 @@ public class UIManager : MonoBehaviour
     {
         _globalEventManager = globalEventManager;
         _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthDecrease, DecreaseHealth);
-        _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthDecrease, IncreaseHealth);
+        _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthIncrease, IncreaseHealth);
     }
 
     private void DecreaseHealth(object o)
     {
         Debug.Log("UIManager::DecreaseHealth");
-        healthScriptableObject.health -= 10;
         healthText.text = healthScriptableObject.health.ToString();
     }
 
     private void IncreaseHealth(object o)
     {
         Debug.Log("UIManager::IncreaseHealth");
-        healthScriptableObject.health += 10;
         healthText.text = healthScriptableObject.health.ToString();
     }
     
