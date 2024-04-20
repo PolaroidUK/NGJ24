@@ -13,6 +13,8 @@ public class GlobalEventManager : MonoBehaviour
       Player1HealthIncrease,
       Player2HealthDecrease,
       Player2HealthIncrease,
+      BeginCountdown,
+      BeginGame,
     }
 
     // Main Dictionary of Events
