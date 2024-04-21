@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
             // create the secret.
             Debug.Log("Adding Player Secret - " + playerSecretString);
             playerSecrets.Add(playerIndex,playerSecretString);
+            // audioManager.PlayPaperCrumple();
         }
     }
     public string GetPlayerSecret(int playerIndex)

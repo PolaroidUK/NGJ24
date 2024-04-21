@@ -237,6 +237,10 @@ public class AudioManager : MonoBehaviour
     {
         playOneShot(confirmUIRef);
     }
+    public void PlayPaperCrumple()
+    {
+        playOneShot(paperCrumplingRef);
+    }
 
    
 
