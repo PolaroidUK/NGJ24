@@ -9,6 +9,13 @@ public class AudioManager : MonoBehaviour
 {
 
     [SerializeField] EventReference mainMusicRef;
+    [SerializeField] EventReference paperCrumplingRef;
+    [SerializeField] EventReference reflectSoundRef;
+    [SerializeField] EventReference hurtSoundRef;
+    [SerializeField] EventReference fireSoundRef;
+    [SerializeField] EventReference uiClickRef;
+    [SerializeField] EventReference confirmUIRef;
+
     
     private Transform PlayerTransform; // Needed?
 
@@ -20,7 +27,7 @@ public class AudioManager : MonoBehaviour
     {
         // Create Instances.
         mainMusicInst = RuntimeManager.CreateInstance(mainMusicRef);
-        PlayMainMusic();
+        // PlayMainMusic();
     }
 
 
@@ -180,8 +187,6 @@ public class AudioManager : MonoBehaviour
     public void playOneShot (EventReference eventRef)
     {
         RuntimeManager.PlayOneShot(eventRef);
-
-        RuntimeManager.PlayOneShot(eventRef);
     }
     public void playOneShotAtPosition (EventReference eventRef, Vector3 position)
     {
@@ -203,6 +208,38 @@ public class AudioManager : MonoBehaviour
         // TODO REMOVE - This is just for testing:
         // PlayInstance(Base_World_Drones);
         mainMusicInst.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void OnGameOver()
+    {
+        StopMainMusic();
+        playOneShot(paperCrumplingRef);
+
+    }
+
+    public void PlayFireSound()
+    {
+        playOneShot(fireSoundRef);
+    }
+    public void PlayReflectSound()
+    {
+        playOneShot(reflectSoundRef);
+    }
+    public void PlayHurtSound()
+    {
+        playOneShot(hurtSoundRef);
+    }
+    public void PlayUIClick()
+    {
+        playOneShot(uiClickRef);
+    }
+    public void PlayConfirmUI()
+    {
+        playOneShot(confirmUIRef);
+    }
+    public void PlayPaperCrumple()
+    {
+        playOneShot(paperCrumplingRef);
     }
 
    

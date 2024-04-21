@@ -11,6 +11,8 @@ public class StartManager : MonoBehaviour
     [SerializeField] RectTransform fadeCanvasTransform;
     [SerializeField] Animator canvasAnimator;
 
+    [SerializeField] FMODUnity.EventReference startclickRef;
+
     void Start()
     {
         fadeCanvasTransform.gameObject.SetActive(true);
@@ -26,6 +28,7 @@ public class StartManager : MonoBehaviour
     {
         // Fade in Canvas
         canvasAnimator.SetTrigger("Start");
+        FMODUnity.RuntimeManager.PlayOneShot(startclickRef);
         yield return new WaitForSeconds(1);
         // Start Game.
         SceneManager.LoadScene(mainGameSceneIndex);

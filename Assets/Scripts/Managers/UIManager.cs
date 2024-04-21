@@ -109,6 +109,8 @@ public class UIManager : MonoBehaviour
             nextCanvas = introFlowCanvases[currentUIFlowIndex + 1];
         }
 
+        GameManager.Instance.audioManager.PlayUIClick();
+
         // Behave differently depending on the current flow index.
     }
 

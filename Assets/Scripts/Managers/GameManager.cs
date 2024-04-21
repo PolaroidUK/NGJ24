@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
             // create the secret.
             Debug.Log("Adding Player Secret - " + playerSecretString);
             playerSecrets.Add(playerIndex,playerSecretString);
+            // audioManager.PlayPaperCrumple();
         }
     }
     public string GetPlayerSecret(int playerIndex)
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over - Who lost? " + playerIDWhoLost);
         // Set Game Over with player who lost Id.
         globalEventManager.Dispatch(GlobalEventManager.EventTypes.GameOver, playerIDWhoLost);
+        audioManager.OnGameOver();
     }
 
     void OnSceneLoaded (Scene sceneloaded, LoadSceneMode mode)
