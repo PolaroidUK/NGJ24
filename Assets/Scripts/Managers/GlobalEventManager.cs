@@ -9,6 +9,7 @@ public class GlobalEventManager : MonoBehaviour
 {
     public enum EventTypes
     {
+      PlayerJoined,
       Player1HealthDecrease,
       Player1HealthIncrease,
       Player2HealthDecrease,
