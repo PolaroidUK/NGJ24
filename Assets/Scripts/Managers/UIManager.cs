@@ -7,7 +7,6 @@ using Unity.PlasticSCM.Editor.WebApi;
 public class UIManager : MonoBehaviour
 {
     GlobalEventManager _globalEventManager;
-    [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] PlayerController playerController;
     [SerializeField] List<GameObject> introFlowCanvases;
     [SerializeField] TMP_InputField secretInputField;
@@ -17,6 +16,8 @@ public class UIManager : MonoBehaviour
     public GameObject currentCanvas;
     public GameObject nextCanvas;
 
+    [SerializeField] GameOverCanvas gameOverCanvas;
+
     void  Start()
     {
          //healthText.text = playerController.health.ToString();
@@ -24,6 +25,23 @@ public class UIManager : MonoBehaviour
         nextCanvas = introFlowCanvases[currentUIFlowIndex + 1];
 
         currentCanvas.SetActive(true);
+        gameOverCanvas.gameObject.SetActive(false);
+
+        // for (int i = currentUIFlowIndex + 1; i < introFlowCanvases.Count; i++)
+        // {
+        //     introFlowCanvases[i].SetActive(false);
+        // }
+    }
+    void  OnEnable()
+    {
+        currentUIFlowIndex = 0;
+        currentPlayerIndex = 0;
+         //healthText.text = playerController.health.ToString();
+        currentCanvas = introFlowCanvases[currentUIFlowIndex];
+        nextCanvas = introFlowCanvases[currentUIFlowIndex + 1];
+
+        currentCanvas.SetActive(true);
+        gameOverCanvas.gameObject.SetActive(false);
 
         // for (int i = currentUIFlowIndex + 1; i < introFlowCanvases.Count; i++)
         // {
@@ -31,24 +49,33 @@ public class UIManager : MonoBehaviour
         // }
     }
 
+    public void Reset()
+    {
+        currentUIFlowIndex = 0;
+        currentPlayerIndex = 0;
+        currentCanvas = introFlowCanvases[currentUIFlowIndex];
+        nextCanvas = introFlowCanvases[currentUIFlowIndex + 1];
+
+        currentCanvas.SetActive(true);
+        gameOverCanvas.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        //TEST to see the game over screen.
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("SPACE BAR");
+            GameManager.Instance.GameWonByPlayer(0);
+        }
+    }
+
     public void Initialize (GlobalEventManager globalEventManager)
     {
         _globalEventManager = globalEventManager;
-        _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthDecrease, DecreaseHealth);
-        _globalEventManager.AddListener(GlobalEventManager.EventTypes.Player1HealthIncrease, IncreaseHealth);
+        _globalEventManager.AddListener(GlobalEventManager.EventTypes.GameOver, OnGameOver);
     }
 
-    private void DecreaseHealth(object o)
-    {
-        Debug.Log("UIManager::DecreaseHealth");
-        healthText.text = playerController.health.ToString();
-    }
-
-    private void IncreaseHealth(object o)
-    {
-        Debug.Log("UIManager::IncreaseHealth");
-        healthText.text = playerController.health.ToString();
-    }
 
     public void IncrementUIFlow()
     {
@@ -90,6 +117,13 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.SetPlayerSecret(currentPlayerIndex, secretInputField.text);
         // Clear The Text Field.
         secretInputField.text = "";
+    }
+
+    public void OnGameOver (object playerWhoLostIdObject)
+    {
+        gameOverCanvas.gameObject.SetActive(true);
+        gameOverCanvas.SetPlayerSecret((int)playerWhoLostIdObject);
+        
     }
     
 }

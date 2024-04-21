@@ -23,6 +23,8 @@ public class PlayerManagerEvents : MonoBehaviour
       playersJoined++;
       DisableJoining();
       gameManager.PlayersJoined();
+
+      GameManager.Instance.globalEventManager.Dispatch(GlobalEventManager.EventTypes.PlayerJoined, null);
       
       if (playersJoined >= 2) // When player two joins, and should a third or more players join (after death potentially), sort them
       {
@@ -32,7 +34,7 @@ public class PlayerManagerEvents : MonoBehaviour
 
    public void EnableJoining()
    {
-      playerInputManager.EnableJoining();
+      GetComponent<PlayerInputManager>().EnableJoining();
    }
    public void DisableJoining()
    {
