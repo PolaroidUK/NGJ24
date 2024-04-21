@@ -8,6 +8,7 @@ public class PlayerManagerEvents : MonoBehaviour
    public int playersJoined = 0;
    public PlayerInputManager playerInputManager;
    private GameManager gameManager;
+   private PlayerController player1, player2;
    private void Start()
    {
       playerInputManager = GetComponent<PlayerInputManager>();
@@ -17,12 +18,15 @@ public class PlayerManagerEvents : MonoBehaviour
 
    void OnPlayerJoined()
    {
+      var ps =FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
+      ps[playersJoined].Set(playersJoined);
       playersJoined++;
       DisableJoining();
+      gameManager.PlayersJoined();
       
       if (playersJoined >= 2) // When player two joins, and should a third or more players join (after death potentially), sort them
       {
-         SortPlayers();
+        // SortPlayers();
       }
    }
 
