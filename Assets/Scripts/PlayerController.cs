@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
         textMesh.text = health + "";
         if (health <= 0)
         {
-            //Destroy(gameObject);
+            GameManager.Instance.GameWonByPlayer(id);
         }
     }
 

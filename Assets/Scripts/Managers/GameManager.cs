@@ -91,4 +91,9 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void GameWonByPlayer(int playerIDWhoLost)
+    {
+        
+    }
 }
