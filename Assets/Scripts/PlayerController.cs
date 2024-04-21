@@ -37,22 +37,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingTime = 1f;
     [SerializeField] private float dashingCooldown = 1f;
 
+    // [SerializeField] public float maxAngle = 0;
+    // [SerializeField] public float minAngle = 0;
 
     [SerializeField] public GameObject attackPrefab;
     [SerializeField] public GameObject healPrefab;
-    [SerializeField] public float maxAngle = 0;
-    [SerializeField] public float minAngle = 0;
+    
 
     public 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
         _globalEventManager = GameManager.Instance.globalEventManager;
 
         dashbarObject.SetActive(false);
 
-        // attackPrefab = transform.Find("AttackPrefab").gameObject;
-        // healPrefab = transform.Find("HealPrefab").gameObject;
 
         ShowAttack();
     }
@@ -148,15 +148,40 @@ public class PlayerController : MonoBehaviour
     }
     private void PointerMove()
     {
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        // Normalize angle to range [0, 360)
-        angle = (angle + 360) % 360;
-        angle = Mathf.Clamp(angle, minAngle, maxAngle);
-        pointer.rotation = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-   
 
-   
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        angle = (angle + 360) % 360;  // Normalize the angle to 0-360 range
+
+        float minAngle, maxAngle;
+
+        if (lookDirection.x >= 0)
+        {
+            // Right-facing (from -20 to +20 degrees)
+            if (angle > 180)
+            {  // If angle is on the left side of the circle
+                minAngle = 340; 
+                maxAngle = 360;
+            }
+            else
+            {  // If angle is on the right side of the circle
+                minAngle = 0;
+                maxAngle = 20;
+            }
+        }
+        else
+        {
+            // Left-facing (from 160 to 200 degrees)
+            minAngle = 160;
+            maxAngle = 200;
+        }
+
+        angle = Mathf.Clamp(angle, minAngle, maxAngle);
+
+        pointer.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle); ;
+
+
+
     }
 
     public void DealDamage()
@@ -192,8 +217,6 @@ public class PlayerController : MonoBehaviour
             rightLimit = 0;
             lookDirection.x = 1;
             lookDirection.y = 0;
-            minAngle = 0;
-            maxAngle = 20;
         }
         else
         {
@@ -201,8 +224,6 @@ public class PlayerController : MonoBehaviour
             rightLimit = 8;
             lookDirection.x = -1;
             lookDirection.y = 0;
-            minAngle = 160;
-            maxAngle = 200;
         }
     }
 
