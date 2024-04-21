@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
         textMesh.text = health + "";
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
     public void Set(int i) // This is for sorting the players
     {
         id = i;
-        if (id == 1)
+        if (id == 0)
         {
             leftLimit = -8;
             rightLimit = 0;
