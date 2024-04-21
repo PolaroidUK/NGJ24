@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("GameManager tried to create itself twice!");
         }
 
-         DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
 
         // Set the static Instance to this.
         Instance = this;
@@ -85,5 +85,15 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Secret - " + secret);
         }
+    }
+
+    public void PlayersJoined()
+    {
+        
+    }
+
+    public void GameWonByPlayer(int playerIDWhoLost)
+    {
+        
     }
 }

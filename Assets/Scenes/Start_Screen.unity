@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325f092f0595ded4ea323761a2679749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainGameSceneIndex: 2
+  mainGameSceneIndex: 1
   fadeCanvasTransform: {fileID: 492243968}
   canvasAnimator: {fileID: 492243970}
 --- !u!1 &1811224759
