@@ -34,7 +34,7 @@ public class PlayerManagerEvents : MonoBehaviour
 
    public void EnableJoining()
    {
-      playerInputManager.EnableJoining();
+      GetComponent<PlayerInputManager>().EnableJoining();
    }
    public void DisableJoining()
    {
