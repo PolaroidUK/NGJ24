@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +37,13 @@ public class GameManager : MonoBehaviour
         uiManager = GetComponentInChildren<UIManager>();
         uiManager.Initialize(globalEventManager);
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void OnDestroy()
@@ -50,6 +58,12 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
         Application.Quit();
+    }
+
+    public void ReturnToStartScreen()
+    {
+        Debug.Log("Return To Start Screen");
+        SceneManager.LoadScene(0);
     }
 
 
@@ -94,6 +108,33 @@ public class GameManager : MonoBehaviour
 
     public void GameWonByPlayer(int playerIDWhoLost)
     {
-        
+        Debug.Log("Game Over - Who lost? " + playerIDWhoLost);
+        // Set Game Over with player who lost Id.
+        globalEventManager.Dispatch(GlobalEventManager.EventTypes.GameOver, playerIDWhoLost);
+    }
+
+    void OnSceneLoaded (Scene sceneloaded, LoadSceneMode mode)
+    {
+        if (sceneloaded.buildIndex == 0)
+        {
+            OnStartScreenLoaded();
+        } 
+        else if (sceneloaded.buildIndex == 1)
+        {
+            OnMainGameLoaded();
+        }
+    }
+
+
+    public void OnMainGameLoaded()
+    {
+        Debug.Log("On Main Game Loaded");
+        uiManager.gameObject.SetActive(true);
+    }
+    public void OnStartScreenLoaded()
+    {
+        Debug.Log("On Start Screen Loaded");
+        uiManager.gameObject.SetActive(false);
+        playerSecrets = new  Dictionary<int, string>();
     }
 }
