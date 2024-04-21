@@ -49,8 +49,8 @@ public class PlayerController : MonoBehaviour
 
         dashbarObject.SetActive(false);
 
-        attackPrefab = transform.Find("AttackPrefab").gameObject;
-        healPrefab = transform.Find("HealPrefab").gameObject;
+        //attackPrefab = transform.Find("AttackPrefab").gameObject;
+        //healPrefab = transform.Find("HealPrefab").gameObject;
 
         ShowAttack();
     }
@@ -180,14 +180,14 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            hearts[i].SetActive(i<=health);
+            hearts[i].SetActive(i<health);
         }
     }
 
     public void Set(int i) // This is for sorting the players
     {
         id = i;
-        GetComponent<SpriteRenderer>().sprite = sprites[id];
+        modelSprite.sprite = sprites[id];
         if (id == 0)
         {
             leftLimit = -8;
@@ -256,6 +256,7 @@ public class PlayerController : MonoBehaviour
 
 
     private bool showingAttack = true;
+    [SerializeField] private SpriteRenderer modelSprite;
 
     // Call this method to toggle between prefabs
     public void Toggle()
@@ -283,5 +284,4 @@ public class PlayerController : MonoBehaviour
         healPrefab.SetActive(true);
         showingAttack = false;
     }
-
 }
