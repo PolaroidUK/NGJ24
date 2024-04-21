@@ -36,8 +36,16 @@ public class HUDCanvas : MonoBehaviour
             yield return new WaitForSeconds(1);
             count --;
         }
-       
+
+        countdownNumberText.text = "BATTLE!";
+        GameManager.Instance.audioManager.PlayMainMusic();
+
+        yield return new WaitForSeconds(1);
+
         countdownNumberText.gameObject.SetActive(false);
+
+        GameManager.Instance.globalEventManager.Dispatch(GlobalEventManager.EventTypes.BeginGame, null);
+
         // count down is finished...
 
         // SET GAME CAN START

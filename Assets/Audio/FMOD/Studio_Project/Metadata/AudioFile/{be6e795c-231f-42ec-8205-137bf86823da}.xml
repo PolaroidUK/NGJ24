@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{be6e795c-231f-42ec-8205-137bf86823da}">
+		<property name="assetPath">
+			<value>653952__12beesinatrenchcoat__paper-crumpling.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>5.8491383219954649</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{79a9599e-3d73-4a8f-828f-a73661f385ec}</destination>
+		</relationship>
+	</object>
+</objects>

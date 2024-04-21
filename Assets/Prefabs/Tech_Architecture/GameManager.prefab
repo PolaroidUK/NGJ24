@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89537e324683fc4085f653983ad1fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
   playerController: {fileID: 0}
   introFlowCanvases:
   - {fileID: 9104973543502835457}
@@ -1573,6 +1572,48 @@ MonoBehaviour:
       Data3: -1420598126
       Data4: -1780810607
     Path: event:/Main_Music
+  paperCrumplingRef:
+    Guid:
+      Data1: -30530543
+      Data2: 1264663864
+      Data3: 1525940647
+      Data4: -1294694570
+    Path: event:/Paper_Fold
+  reflectSoundRef:
+    Guid:
+      Data1: 2042277571
+      Data2: 1170937507
+      Data3: -1713623640
+      Data4: 1280338986
+    Path: event:/Reflect
+  hurtSoundRef:
+    Guid:
+      Data1: -1190301852
+      Data2: 1229374660
+      Data3: -387464576
+      Data4: -1946365395
+    Path: event:/Hurt
+  fireSoundRef:
+    Guid:
+      Data1: 1887476791
+      Data2: 1188731702
+      Data3: -1116948088
+      Data4: 1677722039
+    Path: event:/Fire
+  uiClickRef:
+    Guid:
+      Data1: 1762526373
+      Data2: 1218905346
+      Data3: -2104134734
+      Data4: -312583382
+    Path: event:/UI_Click
+  confirmUIRef:
+    Guid:
+      Data1: 1993747991
+      Data2: 1154621855
+      Data3: -46872927
+      Data4: 1172433183
+    Path: event:/Confirm_UI
 --- !u!1 &6170876215030165810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,7 +2677,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5612691037539050699
 CanvasRenderer:
@@ -2666,7 +2707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

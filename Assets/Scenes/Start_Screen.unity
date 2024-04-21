@@ -706,6 +706,13 @@ MonoBehaviour:
   mainGameSceneIndex: 1
   fadeCanvasTransform: {fileID: 492243968}
   canvasAnimator: {fileID: 492243970}
+  startclickRef:
+    Guid:
+      Data1: 1993747991
+      Data2: 1154621855
+      Data3: -46872927
+      Data4: 1172433183
+    Path: event:/Confirm_UI
 --- !u!1 &1811224759
 GameObject:
   m_ObjectHideFlags: 0

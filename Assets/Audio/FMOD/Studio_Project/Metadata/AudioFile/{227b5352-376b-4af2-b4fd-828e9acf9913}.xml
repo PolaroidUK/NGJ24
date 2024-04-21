@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{227b5352-376b-4af2-b4fd-828e9acf9913}">
+		<property name="assetPath">
+			<value>445977__horcasitas__paper-plane-blow.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.79816326530612247</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{79a9599e-3d73-4a8f-828f-a73661f385ec}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -51,6 +51,7 @@ public class PlayerJoinScreen : MonoBehaviour
     {
         joinGroup.SetActive(false);
         proceedGroup.SetActive(true);
+        GameManager.Instance.audioManager.PlayConfirmUI();
         // Remove Text asking player to join
         // Show eye closing and Shield Text.
 
