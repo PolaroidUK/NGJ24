@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PreSecretScreen : MonoBehaviour
+public class PlayerJoinScreen : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI warningText;
 

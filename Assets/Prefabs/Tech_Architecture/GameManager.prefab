@@ -2121,7 +2121,7 @@ GameObject:
   - component: {fileID: 5292492939774962663}
   - component: {fileID: 8955121055768340020}
   m_Layer: 0
-  m_Name: PreSecretScreen
+  m_Name: PlayerJoinScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
