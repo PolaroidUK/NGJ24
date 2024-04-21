@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float leftLimit, rightLimit;
 
 
+    [SerializeField]private GameObject[] hearts;
 
     GlobalEventManager _globalEventManager;
     [SerializeField] public int health = 3;
@@ -36,7 +37,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 1f;
     [SerializeField] private float dashingCooldown = 1f;
-
+    [SerializeField] private Sprite[] sprites;
+    
 
     public GameObject attackPrefab;
     public GameObject healPrefab;
@@ -153,6 +155,8 @@ public class PlayerController : MonoBehaviour
         health -= 1;
 
         textMesh.text = health + "";
+        
+        UpdateHearts();
         if (health <= 0)
         {
             GameManager.Instance.GameWonByPlayer(id);
@@ -169,11 +173,21 @@ public class PlayerController : MonoBehaviour
         health += 1;
 
         textMesh.text = health + "";
+        UpdateHearts();
+    }
+
+    void UpdateHearts()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            hearts[i].SetActive(i<=health);
+        }
     }
 
     public void Set(int i) // This is for sorting the players
     {
         id = i;
+        GetComponent<SpriteRenderer>().sprite = sprites[id];
         if (id == 0)
         {
             leftLimit = -8;
