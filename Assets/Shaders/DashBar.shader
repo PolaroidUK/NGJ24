@@ -1,5 +1,5 @@
 Shader "Unlit/DashBar" {
-    Properties{
+    Properties {
         _Dash("Dash", Range(0, 1)) = 0
         _Color("Bar Color", Color) = (0, 0, 1, 1)
     }
@@ -26,22 +26,21 @@ Shader "Unlit/DashBar" {
                 float _Dash;
                 fixed4 _Color;
 
-                v2f vert(appdata v)
-                {
+                v2f vert(appdata v) {
                     v2f o;
                     o.vertex = UnityObjectToClipPos(v.vertex);
                     o.uv = v.uv;
                     return o;
                 }
 
-                fixed4 frag(v2f i) : SV_Target
-                {
+                fixed4 frag(v2f i) : SV_Target {
                     if (i.uv.x <= _Dash) {
                         return _Color;
                     }
 
                     return fixed4(0, 0, 0, 0);
                 }
+
                 ENDCG
                }
             }

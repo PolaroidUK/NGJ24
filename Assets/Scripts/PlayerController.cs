@@ -38,8 +38,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingCooldown = 1f;
 
 
-    public GameObject attackPrefab;
-    public GameObject healPrefab;
+    [SerializeField] public GameObject attackPrefab;
+    [SerializeField] public GameObject healPrefab;
+    [SerializeField] public float maxAngle = 0;
+    [SerializeField] public float minAngle = 0;
+
+    public 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,8 +51,8 @@ public class PlayerController : MonoBehaviour
 
         dashbarObject.SetActive(false);
 
-        attackPrefab = transform.Find("AttackPrefab").gameObject;
-        healPrefab = transform.Find("HealPrefab").gameObject;
+        // attackPrefab = transform.Find("AttackPrefab").gameObject;
+        // healPrefab = transform.Find("HealPrefab").gameObject;
 
         ShowAttack();
     }
@@ -144,7 +148,15 @@ public class PlayerController : MonoBehaviour
     }
     private void PointerMove()
     {
-        pointer.rotation = quaternion.AxisAngle(Vector3.forward, Mathf.Atan2(lookDirection.y, lookDirection.x));
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        // Normalize angle to range [0, 360)
+        angle = (angle + 360) % 360;
+        angle = Mathf.Clamp(angle, minAngle, maxAngle);
+        pointer.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+   
+
+   
     }
 
     public void DealDamage()
@@ -179,12 +191,18 @@ public class PlayerController : MonoBehaviour
             leftLimit = -8;
             rightLimit = 0;
             lookDirection.x = 1;
+            lookDirection.y = 0;
+            minAngle = 0;
+            maxAngle = 20;
         }
         else
         {
             leftLimit = 0;
             rightLimit = 8;
             lookDirection.x = -1;
+            lookDirection.y = 0;
+            minAngle = 160;
+            maxAngle = 200;
         }
     }
 
@@ -232,11 +250,10 @@ public class PlayerController : MonoBehaviour
         if (canDash)
         {
             dashbarObject.SetActive(true);
-
             isDashing = true;
             canDash = false;
-
             StartCoroutine(DashCooldown());
+            
         }
     }
 
