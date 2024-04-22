@@ -270,6 +270,17 @@
                 },
                 {
                     "name": "",
+                    "id": "f5ea6a36-2336-4093-9cae-8ea05c7d66e6",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ca2a577d-716a-4013-806b-623643d746ad",
                     "path": "<Keyboard>/space",
                     "interactions": "",
