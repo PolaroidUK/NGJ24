@@ -785,12 +785,12 @@ GameObject:
   - component: {fileID: 3389374513670197805}
   - component: {fileID: 6736644864947307789}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Health Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4116227209810771344
 RectTransform:
   m_ObjectHideFlags: 0
