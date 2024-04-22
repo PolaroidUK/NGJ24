@@ -1042,6 +1042,14 @@ PrefabInstance:
       propertyPath: m_PlayerPrefab
       value: 
       objectReference: {fileID: 3690080781587094258, guid: 3d0595f321a1afe4a85b6e94556f9e30, type: 3}
+    - target: {fileID: 1338040910019736872, guid: 6b32fec2316e4b949819af70878333fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772168054229825376, guid: 6b32fec2316e4b949819af70878333fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4612975343715113881, guid: 6b32fec2316e4b949819af70878333fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.17018941
