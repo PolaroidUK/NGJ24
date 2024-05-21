@@ -1,9 +1,10 @@
+//using System;
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.MPE;
+//using Unity.VisualScripting;
+//using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float leftLimit, rightLimit;
 
 
-    [SerializeField]private GameObject[] hearts;
+    [SerializeField] private GameObject[] hearts;
 
     GlobalEventManager _globalEventManager;
     [SerializeField] public int health = 3;
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingTime = 1f;
     [SerializeField] private float dashingCooldown = 1f;
     [SerializeField] private Sprite[] sprites;
-    
+
 
     public GameObject attackPrefab;
     public GameObject healPrefab;
@@ -60,8 +61,6 @@ public class PlayerController : MonoBehaviour
         Move();
         ConstraintCheck();
         PointerMove();
-
-        
     }
 
     void OnMove(InputValue iv)
@@ -73,7 +72,20 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputVector = iv.Get<Vector2>();
         if (inputVector != Vector2.zero)
+        {
+            // For gamepads:
             lookDirection = inputVector.normalized;
+
+            // For mouse:
+            //lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            //lookDirection = lookDirection.normalized;
+
+
+            // For both: have the player character look towards the given direction
+            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            modelSprite.transform.rotation = rotation;
+        }
     }
 
     void OnTestA(InputValue iv)
@@ -107,10 +119,11 @@ public class PlayerController : MonoBehaviour
 
     // If we want to be able to shoot on the left trigger
     /*
-        public void OnFire2()
-        {
-            Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection, false);
-        }*/
+    public void OnFire2()
+    {
+        Instantiate(shot, pointerPosition.position, quaternion.identity).GetComponent<Shot>().Shoot(lookDirection, false);
+    }
+    */
 
     void Move()
     {
@@ -155,7 +168,7 @@ public class PlayerController : MonoBehaviour
         health -= 1;
 
         textMesh.text = health + "";
-        
+
         UpdateHearts();
         if (health <= 0)
         {
@@ -180,7 +193,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            hearts[i].SetActive(i<health);
+            hearts[i].SetActive(i < health);
         }
     }
 
