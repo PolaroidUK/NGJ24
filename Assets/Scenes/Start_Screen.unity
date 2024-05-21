@@ -1935,7 +1935,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Two adults met at their old playground. \n\nSuddenly they remembered an
-    old game of theirs, throwing paperplanes with secrets at each other."
+    old game of theirs, throwing paper planes with secrets at each other."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
