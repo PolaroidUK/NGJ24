@@ -16,7 +16,7 @@ public class SecretScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentPlayerText.text = "Player " + uiManager.currentPlayerIndex + 1;
+        currentPlayerText.text = "Player " + (uiManager.currentPlayerIndex + 1);
 
         if (inputField.text != null && inputField.text != "")
         {
