@@ -1,10 +1,10 @@
-using System;
+//using System;
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.MPE;
+//using Unity.VisualScripting;
+//using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
@@ -74,11 +74,11 @@ public class PlayerController : MonoBehaviour
         if (inputVector != Vector2.zero)
         {
             // For gamepads:
-            // lookDirection = inputVector.normalized;
+            lookDirection = inputVector.normalized;
 
             // For mouse:
-            lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            lookDirection = lookDirection.normalized;
+            //lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            //lookDirection = lookDirection.normalized;
 
 
             // For both: have the player character look towards the given direction

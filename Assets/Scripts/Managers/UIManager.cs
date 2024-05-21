@@ -1,8 +1,8 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
+//using Unity.PlasticSCM.Editor.WebApi;
 
 public class UIManager : MonoBehaviour
 {
@@ -63,11 +63,11 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         //TEST to see the game over screen.
-        if(Input.GetKey(KeyCode.Escape))
-        {
-            Debug.Log("SPACE BAR");
-            GameManager.Instance.GameWonByPlayer(0);
-        }
+        // if(Input.GetKey(KeyCode.Escape))
+        // {
+        //     Debug.Log("SPACE BAR");
+        //     GameManager.Instance.GameWonByPlayer(0);
+        // }
     }
 
     public void Initialize (GlobalEventManager globalEventManager)
@@ -127,5 +127,4 @@ public class UIManager : MonoBehaviour
         gameOverCanvas.SetPlayerSecret((int)playerWhoLostIdObject);
         
     }
-    
 }
